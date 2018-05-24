@@ -1,0 +1,309 @@
+@import "global";
+
+
+main {
+    @extend .relative-box;
+    .heading {
+        h2 {
+            text-transform: uppercase;
+            font-family: $raleway;
+            font-size: 2rem;
+            line-height: 2em;
+            margin-bottom: 1em;
+        }
+    }
+    .slashed {
+        position: relative;
+        display: inline-block;
+        &:after {
+            content: '/';
+            left: 2px;
+            color: $theme;
+            position: absolute;
+        }
+    }
+    .blockquote-theme {
+        border-color: $theme;
+        footer.brand {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    }
+}
+
+#footer-promotion {
+    @extend .relative-box;
+    text-align: center;
+    padding: 50px 0px;
+    background-image: url(../img/bg.jpg);
+    box-shadow: inset 0px 0px 10px 7px darken($base, 20%);
+    overflow: hidden;
+    &:before {
+        content: '';
+        background-color: rgba($theme, 0.85);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .promotion-box {
+        position: relative;
+        color: $white;
+        .heading {
+            position: relative;
+        }
+        p {
+            position: relative;
+            font-size: 1rem;
+            font-family: $montserrat;
+            text-transform: uppercase;
+            line-height: 2.25em;
+            margin-bottom: 2.5em;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .btn-start {
+            margin-bottom: 1rem;
+            background-color: #fff50f;
+            color: #000000!important;
+            &:hover,
+            &:focus {
+                background-color: darken(#fff50f, 4%) !important;
+            }
+        }
+    }
+    .promotion-form {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: $theme;
+        width: 100%;
+        height: 100%;
+        z-index: 9;
+        @include transition(all 0.35s);
+        &.hideIt {
+            top: 100%;
+        }
+        .container {
+            padding: 50px 15px;
+            @include mq($from: desktop){
+                padding: 50px 50px;
+            }
+            height: 99%;
+            .list-form {
+                overflow: hidden;
+                li {
+                    width: 100%;
+                    visibility: hidden;
+                    height: 0;
+                    position: relative;
+                    @include transition(all 0.35s);
+                    overflow: hidden;
+                    &:nth-child(1) {
+                        .form-inline {
+                            @include mq($from: tablet){
+                                text-align: center;
+                            }
+                        }
+                    }
+                    .heading {
+                        display: block;
+                        overflow: hidden;
+                        margin: 1em 0;
+                        h2 {
+                            @include transform(translateY(100%));
+                            margin: 0;
+                            @include transition(all 0.35s);
+                        }
+                    }
+                    .form-fields {
+                        opacity: 0;
+                        text-align: left;
+                        width: 100%;
+                        margin: 0px auto 30px;
+                        min-height: 59px;
+                        @include transition(all 0.35s);
+                        color: $white;
+                        position: relative;
+                        @include mq($from: desktop) {
+                            width: 80%;
+                        }
+                        .inputLimit {
+                            position: absolute;
+                            bottom: -30px;
+                            right: 0;
+                            .limitReached {
+                                color: #f3091d;
+                            }
+                        }
+                        .prefix.active {
+                            color: darken($theme, 25%);
+                        }
+                        .form-control {
+                            border-color: $white;
+                            box-shadow: 0 1px 0 0 $white;
+                            height: 1rem;
+                            font-family: $montserrat;
+                            font-size: 1rem;
+                            color: $white;
+                            padding-top: 3px;
+                            @include transition(all 0.35s);
+                            &:focus {
+                                border-bottom: 1px solid darken($theme, 25%);
+                                -webkit-box-shadow: 0 1px 0 0 darken($theme, 25%);
+                                box-shadow: 0 1px 0 0 darken($theme, 25%);
+                            }
+                        }
+                    }
+                    .action-buttons {
+                        opacity: 0;
+                        @include transition(all 0.35s);
+                    }
+                    &.current {
+                        visibility: visible;
+                        height: auto;
+                        @include transition(all 0.35s);
+                        .heading {
+                            h2 {
+                                @include transform(translateY(0));
+                                @include transition(all 0.35s);
+                            }
+                        }
+                        .form-fields {
+                            opacity: 1;
+                            @include transition(all 0.35s);
+                        }
+                        .action-buttons {
+                            opacity: 1;
+                            @include transition(all 0.35s);
+                        }
+                    }
+                }
+            }
+        }
+        .progress {
+            height: 1%;
+            width: 0;
+            bottom: 0;
+            margin: 0px;
+            position: absolute;
+            background-color: $base;
+            @include transition(all 0.35s linear);
+        }
+    }
+}
+
+.footer {
+    @extend .relative-box;
+    padding: 30px 0;
+    text-align: center;
+    background-color: darken($white, 3%);
+    @include transition(all 0.35s);
+    &.sh-facebook {
+        @extend .facebook-bg;
+        a {
+            color: $white;
+        }
+        hr{
+            border-color: $white !important;
+        }
+    }
+    &.sh-twitter {
+        @extend .twitter-bg;
+        a {
+            color: $white;
+        }
+        hr{
+            border-color: $white !important;
+        }
+    }
+    &.sh-googlePlus {
+        @extend .googleplus-bg;
+        a {
+            color: $white;
+        }
+        hr{
+            border-color: $white !important;
+        }
+    }
+    &.sh-linkedin {
+        @extend .linkedin-bg;
+        a {
+            color: $white;
+        }
+        hr{
+            border-color: $white !important;
+        }
+    }
+    &.sh-logo {
+        background-color: $theme;
+        a {
+            color: $white;
+        }
+        hr{
+            border-color: $white !important;
+        }
+    }
+    .logo {
+        width: 140px;
+    }
+    .contact-details {
+        @extend .relative-box;
+        //font-family: $raleway;
+        margin: 30px 0 15px;
+        font-size: 1rem;
+        .connect-details {
+            margin-bottom: 15px;
+            a {
+                &:first-child {
+                    border-right: 1px solid;
+                }
+                &:last-child {
+                    border-left: 1px solid;
+                }
+            }
+        }
+        a {
+            position: relative;
+            padding-right: 0.5em;
+            font-weight: 400;
+            vertical-align: middle;
+            i {
+                font-size: 1rem;
+                margin: 0 0.5em;
+            }
+        }
+        hr {
+            border-color: lighten($base, 10%);
+            width: 80%;
+            display: block;
+            margin: 15px auto;
+            @extend .depth1;
+            @include transition(all 0.35s);
+        }
+    }
+    .social-details {
+        @extend .relative-box;
+        font-size: 1.5rem;
+        li {
+            padding: 0;
+            a {
+                padding: 15px;
+            }
+        }
+    }
+}
+
+#copyrights {
+    @extend .relative-box;
+    background-color: $dark-base;
+    color: $white;
+    padding: 15px 0;
+    h4 {
+        font-size: 0.85rem;
+        text-align: center;
+        font-family: $raleway;
+    }
+}

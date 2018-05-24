@@ -1,0 +1,390 @@
+//These are collection of useful mixins found on web
+// Responsiveness Mixin
+
+// Breakpoints 
+$breakpoints: ( phone: 400px,
+phone-wide: 480px,
+phablet: 560px,
+tablet-small: 640px,
+tablet: 768px,
+tablet-wide: 1024px,
+desktop: 1248px,
+desktop-wide: 1440px,
+huge-screen: 1680px,
+huge-screen-wide: 2560px) !default;
+
+// call to mixin
+@mixin mq( $from: false,
+$to: false,
+$and: false,
+$media-feature: width,
+$media-type: all,
+$bp: $breakpoints) {
+    $min-width: 0;
+    $max-width: 0;
+    $media-query: ''; // From: this breakpoint (inclusive)
+    @if $from {
+        @if type-of($from)==number {
+            $min-width: $from;
+        }
+        @else {
+            $min-width: map_get($bp, $from);
+        }
+    } // Until: that breakpoint (exclusive)
+    @if $to {
+        @if type-of($to)==number {
+            $max-width: $to;
+        }
+        @else {
+            //$negative: if($em-media-queries, 0.01em, 1px);
+            $max-width: map_get($bp, $to) - 1px;
+        }
+    }
+
+    @if $media-feature {
+        @if $min-width !=0 {
+            $media-query: '#{$media-query} and (min-#{$media-feature}: #{$min-width})';
+        }
+        @if $max-width !=0 {
+            $media-query: '#{$media-query} and (max-#{$media-feature}: #{$max-width})';
+        }
+    }
+
+    @if $and {
+        $media-query: '#{$media-query} and #{$and}';
+    } // Remove unnecessary media query prefix 'all and '
+    @if ($media-type=='all' and $media-query !='') {
+        $media-type: '';
+        $media-query: str-slice(unquote($media-query), 6);
+    }
+
+    @media #{$media-type + $media-query} {
+        @content;
+    }
+}
+
+//Implementation for mq mixin
+//div{
+//    @include mq($from: phone) {
+//        background-color: darkmagenta;
+//   }
+//    @include mq($to: desktop) {
+//        background-color: darkmagenta;
+//    }
+//    @include mq(phone, desktop) {
+//        background-color: darkmagenta;
+//    }
+//    @include mq($from: tablet, $and: '(orientation: landscape)') {
+//        background-color: darkmagenta;
+//    }
+//    @include mq(phablet, $media-type: screen) {
+//        background-color: darkmagenta;
+//    }
+//    
+//    *** Advanced use
+//    $custom-breakpoints: (L: 900px, XL: 1200px);
+//    @include mq(L, $bp: $custom-breakpoints) {
+//        background-color: lightgreen;
+//    }
+//}
+//
+
+// For placeholder customization supports for different browsers
+@mixin placeholder {
+    &.placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &::-moz-placeholder {
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+    &::-webkit-input-placeholder {
+        @content;
+    }
+}
+
+//Implementation
+//input,textarea{
+//    @include placeholder {
+//        background-color: black;
+//        color: white;
+//    }
+//}
+//or simply
+//@include placeholder{
+//    background-color: black;
+//    color: white;
+//}
+//this will generate a class with name placeholder which can be used to apply on input fields
+//
+
+// to truncate text by providing max-width
+@mixin truncate($truncation-boundary) {
+    max-width: $truncation-boundary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//Implementation
+//span {
+//    @include truncate(100px);
+//}
+//
+
+// to simplify psuedo and decrease lines of code
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+
+//Implementation
+//div::after {
+//    @include pseudo;
+//    top: -1rem;
+//    left: -1rem;
+//    width: 1rem;
+//    height: 1rem;
+//}
+//
+
+// to generate spacing classes like for margin and padding
+// some default vars
+$top-space-vars: (0 top t, 5 top t, 10 top t, 15 top t, 20 top t, 25 top t, 30 top t);
+$right-space-vars: (0 right r, 5 right r, 10 right r, 15 right r, 20 right r, 25 right r, 30 right r);
+$bottom-space-vars: (0 bottom b, 5 bottom b, 10 bottom b, 15 bottom b, 20 bottom b, 25 bottom b, 30 bottom b);
+$left-space-vars: (0 left l, 5 left l, 10 left l, 15 left l, 20 left l, 25 left l, 30 left l);
+// main mixin
+@mixin generate-spacing-classes($vars, $property, $prefix) {
+    @each $space in $vars {
+        .#{$prefix}-#{nth($space, 3)}-#{nth($space, 1)} {
+            #{$property}-#{nth($space, 2)}: #{nth($space, 1)}px;
+        }
+    }
+}
+
+// call mixin for margin class generation
+//@include generate-spacing-classes($top-space-vars, margin, m);
+//@include generate-spacing-classes($right-space-vars, margin, m);
+//@include generate-spacing-classes($bottom-space-vars, margin, m);
+//@include generate-spacing-classes($left-space-vars, margin, m);
+
+// call mixin for padding class generation
+//@include generate-spacing-classes($top-space-vars, padding, p);
+//@include generate-spacing-classes($right-space-vars, padding, p);
+//@include generate-spacing-classes($bottom-space-vars, padding, p);
+//@include generate-spacing-classes($left-space-vars, padding, p);
+
+// mixin for transition
+@mixin transition ($args) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}//These are collection of useful mixins found on web
+// Responsiveness Mixin
+
+// Breakpoints 
+$breakpoints: ( phone: 400px,
+phone-wide: 480px,
+phablet: 560px,
+tablet-small: 640px,
+tablet: 768px,
+tablet-wide: 1024px,
+desktop: 1248px,
+desktop-wide: 1440px,
+huge-screen: 1680px,
+huge-screen-wide: 2560px) !default;
+
+// call to mixin
+@mixin mq( $from: false,
+$to: false,
+$and: false,
+$media-feature: width,
+$media-type: all,
+$bp: $breakpoints) {
+    $min-width: 0;
+    $max-width: 0;
+    $media-query: ''; // From: this breakpoint (inclusive)
+    @if $from {
+        @if type-of($from)==number {
+            $min-width: $from;
+        }
+        @else {
+            $min-width: map_get($bp, $from);
+        }
+    } // Until: that breakpoint (exclusive)
+    @if $to {
+        @if type-of($to)==number {
+            $max-width: $to;
+        }
+        @else {
+            //$negative: if($em-media-queries, 0.01em, 1px);
+            $max-width: map_get($bp, $to) - 1px;
+        }
+    }
+
+    @if $media-feature {
+        @if $min-width !=0 {
+            $media-query: '#{$media-query} and (min-#{$media-feature}: #{$min-width})';
+        }
+        @if $max-width !=0 {
+            $media-query: '#{$media-query} and (max-#{$media-feature}: #{$max-width})';
+        }
+    }
+
+    @if $and {
+        $media-query: '#{$media-query} and #{$and}';
+    } // Remove unnecessary media query prefix 'all and '
+    @if ($media-type=='all' and $media-query !='') {
+        $media-type: '';
+        $media-query: str-slice(unquote($media-query), 6);
+    }
+
+    @media #{$media-type + $media-query} {
+        @content;
+    }
+}
+
+//Implementation for mq mixin
+//div{
+//    @include mq($from: phone) {
+//        background-color: darkmagenta;
+//   }
+//    @include mq($to: desktop) {
+//        background-color: darkmagenta;
+//    }
+//    @include mq(phone, desktop) {
+//        background-color: darkmagenta;
+//    }
+//    @include mq($from: tablet, $and: '(orientation: landscape)') {
+//        background-color: darkmagenta;
+//    }
+//    @include mq(phablet, $media-type: screen) {
+//        background-color: darkmagenta;
+//    }
+//    
+//    *** Advanced use
+//    $custom-breakpoints: (L: 900px, XL: 1200px);
+//    @include mq(L, $bp: $custom-breakpoints) {
+//        background-color: lightgreen;
+//    }
+//}
+//
+
+// For placeholder customization supports for different browsers
+@mixin placeholder {
+    &.placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &::-moz-placeholder {
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+    &::-webkit-input-placeholder {
+        @content;
+    }
+}
+
+//Implementation
+//input,textarea{
+//    @include placeholder {
+//        background-color: black;
+//        color: white;
+//    }
+//}
+//or simply
+//@include placeholder{
+//    background-color: black;
+//    color: white;
+//}
+//this will generate a class with name placeholder which can be used to apply on input fields
+//
+
+// to truncate text by providing max-width
+@mixin truncate($truncation-boundary) {
+    max-width: $truncation-boundary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//Implementation
+//span {
+//    @include truncate(100px);
+//}
+//
+
+// to simplify psuedo and decrease lines of code
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+
+//Implementation
+//div::after {
+//    @include pseudo;
+//    top: -1rem;
+//    left: -1rem;
+//    width: 1rem;
+//    height: 1rem;
+//}
+//
+
+// to generate spacing classes like for margin and padding
+// some default vars
+$top-space-vars: (0 top t, 5 top t, 10 top t, 15 top t, 20 top t, 25 top t, 30 top t);
+$right-space-vars: (0 right r, 5 right r, 10 right r, 15 right r, 20 right r, 25 right r, 30 right r);
+$bottom-space-vars: (0 bottom b, 5 bottom b, 10 bottom b, 15 bottom b, 20 bottom b, 25 bottom b, 30 bottom b);
+$left-space-vars: (0 left l, 5 left l, 10 left l, 15 left l, 20 left l, 25 left l, 30 left l);
+// main mixin
+@mixin generate-spacing-classes($vars, $property, $prefix) {
+    @each $space in $vars {
+        .#{$prefix}-#{nth($space, 3)}-#{nth($space, 1)} {
+            #{$property}-#{nth($space, 2)}: #{nth($space, 1)}px;
+        }
+    }
+}
+
+// call mixin for margin class generation
+//@include generate-spacing-classes($top-space-vars, margin, m);
+//@include generate-spacing-classes($right-space-vars, margin, m);
+//@include generate-spacing-classes($bottom-space-vars, margin, m);
+//@include generate-spacing-classes($left-space-vars, margin, m);
+
+// call mixin for padding class generation
+//@include generate-spacing-classes($top-space-vars, padding, p);
+//@include generate-spacing-classes($right-space-vars, padding, p);
+//@include generate-spacing-classes($bottom-space-vars, padding, p);
+//@include generate-spacing-classes($left-space-vars, padding, p);
+
+// mixin for transition
+@mixin transition ($args) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+// mixin for transform
+@mixin transform ($args) {
+    -webkit-tranform: $args;
+    -moz-transform: $args;
+    -ms-transform: $args;
+    -o-transform: $args;
+    transform: $args;
+}
