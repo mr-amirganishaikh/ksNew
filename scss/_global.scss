@@ -22,7 +22,6 @@ body {
     font-family: $roboto;
     color: $black;
     background-color: $white;
-    margin-top: 300px;
 }
 
 ol,
@@ -92,70 +91,137 @@ a {
 }
 
 // helper
-.p-l-none {
-    padding-left: 0 !important;
+*.p-l-none {
+    padding-left: 0;
 }
 
-.p-r-none {
-    padding-right: 0 !important;
+*.p-r-none {
+    padding-right: 0;
 }
 
-.p-b-none {
-    padding-bottom: 0 !important;
+*.p-b-none {
+    padding-bottom: 0;
 }
 
-.p-t-none {
-    padding-top: 0 !important;
+*.p-t-none {
+    padding-top: 0;
 }
 
-.p-x-none {
+*.p-x-none {
     @extend .p-l-none;
     @extend .p-r-none;
 }
 
-.p-y-none {
+*.p-y-none {
     @extend .p-t-none;
     @extend .p-b-none;
 }
 
-.p-none {
+*.p-none {
     @extend .p-x-none;
     @extend .p-y-none;
 }
 
-.m-l-none {
-    margin-left: 0 !important;
+*.m-l-none {
+    margin-left: 0;
 }
 
-.m-r-none {
-    margin-right: 0 !important;
+*.m-r-none {
+    margin-right: 0;
 }
 
-.m-b-none {
-    margin-bottom: 0 !important;
+*.m-b-none {
+    margin-bottom: 0;
 }
 
-.m-t-none {
-    margin-top: 0 !important;
+*.m-t-none {
+    margin-top: 0;
 }
 
-.m-x-none {
+*.m-x-none {
     @extend .m-l-none;
     @extend .m-r-none;
 }
 
-.m-y-none {
+*.m-y-none {
     @extend .m-t-none;
     @extend .m-b-none;
 }
 
-.m-none {
+*.m-none {
     @extend .m-x-none;
     @extend .m-y-none;
 }
 
-.margin-t-gap {
+*.margin-t-gap {
     margin-top: 30px;
+}
+
+// Animated Delay
+.animated.delay-05s {
+    -webkit-animation-delay: 0.5s;
+    -moz-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+}
+
+.animated.delay-1s {
+    -webkit-animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    animation-delay: 1s;
+}
+
+.animated.delay-15s {
+    -webkit-animation-delay: 1.5s;
+    -moz-animation-delay: 1.5s;
+    animation-delay: 1.5s;
+}
+
+.animated.delay-2s {
+    -webkit-animation-delay: 2s;
+    -moz-animation-delay: 2s;
+    animation-delay: 2s;
+}
+
+.animated.delay-25s {
+    -webkit-animation-delay: 2.5s;
+    -moz-animation-delay: 2.5s;
+    animation-delay: 2.5s;
+}
+
+.animated.delay-3s {
+    -webkit-animation-delay: 3s;
+    -moz-animation-delay: 3s;
+    animation-delay: 3s;
+}
+
+.animated.delay-35s {
+    -webkit-animation-delay: 3.5s;
+    -moz-animation-delay: 3.5s;
+    animation-delay: 3.5s;
+}
+
+.animated.delay-4s {
+    -webkit-animation-delay: 4s;
+    -moz-animation-delay: 4s;
+    animation-delay: 4s;
+}
+
+.animated.delay-45s {
+    -webkit-animation-delay: 4.5s;
+    -moz-animation-delay: 4.5s;
+    animation-delay: 4.5s;
+}
+
+.animated.delay-5s {
+    -webkit-animation-delay: 5s;
+    -moz-animation-delay: 5s;
+    animation-delay: 5;
+}
+
+.animated.delay-55s {
+    -webkit-animation-delay: 5.5s;
+    -moz-animation-delay: 5.5s;
+    animation-delay: 5.5s;
 }
 
 .margin-b-gap {
@@ -444,11 +510,6 @@ a {
     width: calc(100% - 2.5rem);
 }
 
-#bigHalfCircle path {
-    fill: $base;
-    stroke: $base;
-}
-
 .svgBigHalfCircle {
     position: absolute;
     width: 180%;
@@ -463,7 +524,40 @@ a {
         left: 0;
     }
     #bigHalfCircle path {
+        &.theme{
+            fill: $theme;
+            stroke: $theme;
+        }
+        &.base{
+            fill: $base;
+            stroke: $base;
+        }
+        &.light{
+            fill: darken($white, 7%);
+            stroke: darken($white, 7%);
+        }
         fill: $white;
         stroke: $white;
     }
+}
+
+.totop-gradient{
+    background: $theme; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, darken($theme, 12%), darken($theme, 6%), $theme);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, darken($theme, 12%), darken($theme, 6%), $theme); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.toright-gradient{
+    background: $theme; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, darken($theme, 12%), darken($theme, 6%), $theme);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, darken($theme, 12%), darken($theme, 6%), $theme); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.tobottom-gradient{
+    background: $theme; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, darken($theme, 12%), darken($theme, 6%), $theme);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, darken($theme, 12%), darken($theme, 6%), $theme); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.toleft-gradient{
+    background: $theme; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, darken($theme, 12%), darken($theme, 6%), $theme);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, darken($theme, 12%), darken($theme, 6%), $theme); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

@@ -6,35 +6,80 @@ header{
     left: 0;
     width: 100%;
     display: block;
-    background-color: darken($white, 5%);
+    background-color: rgba($white, 0.75);
     z-index: 99999;
     @extend .depth1;
     @include transition(all 0.25s);
+    &:hover{
+        background-color: rgba($white, 1);
+    }
     #header{
         text-align: center;
         #kreative-navigation{
             li{
                 padding: 0;
                 margin: 0 15px;
-                a{
-                    font-family: $raleway;
-                    font-size: 1.2rem;
-                    font-weight: 600;
-                    padding: 10px 15px;
-                }
                 &.logo{
                     a{
-                        padding: 10px 15px;
+                        display: inline-block;
+                        padding: 3px 15px;
                     }
                     img{
-                        width: 70px;
+                        width: 50px;
                         @include transform(rotate(-45deg));
+                    }
+                }
+                &.link{
+                    &.left{
+                        text-align: right;
+                        > ul{
+                            right: 0;
+                        }
+                    }
+                    &.right{
+                        text-align: left;
+                        > ul{
+                            left: 0;
+                        }
+                    }
+                    display: inline-block;
+                    position: relative;
+                    a{
+                        font-family: $montserrat;
+                        font-weight: 500;
+                        font-size: 1.05rem;
+                        padding: 10px 15px;
+                        display: inline-block;
+                        opacity: 1;
+                        @include transition(all 0.3s);
+                    }
+                    > ul{
+                        position: absolute;
+                        top: 0;
+                        width: auto;
+                        display: inline-block;
+                        opacity: 0;
+                        @include transition(all 0.3s);
+                        li{
+                            a{
+
+                            }
+                        }
+                    }
+                    &.active{
+                        > a{
+                            opacity: 0;
+                        }
+                        > ul{
+                            opacity: 1;
+                        }
                     }
                 }
             }
         }
     }
 }
+
 main {
     @extend .relative-box;
     .heading {
@@ -44,6 +89,34 @@ main {
             font-size: 2rem;
             line-height: 2em;
             margin-bottom: 1em;
+        }
+        h3{
+            text-transform: uppercase;
+            font-family: $raleway;
+            font-size: 1.7rem;
+            line-height: 1.25em;
+            margin-bottom: 0.5em;
+        }
+        hr{
+            &.left{
+                margin-top: 10px;
+                margin-bottom: 10px;
+                margin-left: 0;
+                margin-right: auto;
+            }
+            &.right{
+                margin-top: 10px;
+                margin-bottom: 10px;
+                margin-left: auto;
+                margin-right: 0;
+            }
+            border-color: $base;
+            width: 120px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            @extend .depth2;
         }
     }
     .slashed {
@@ -66,62 +139,11 @@ main {
     }
 }
 
-#homepage-quotes {
-    background-image: url(../img/backgroun2.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    min-height: 325px;
-    #quotes-carousel {
-        .carousel-inner {
-            .item {
-                text-align: center;
-                color: $white;
-                transition-property: opacity;
-                padding: 50px 0px;
-                .caption {
-                    font-family: $roboto;
-                    text-transform: uppercase;
-                    font-size: 2rem;
-                    width: 75%;
-                    margin: 0 auto;
-                    letter-spacing: 2px;
-                    line-height: 2em;
-                    margin-bottom: 1.25em;
-                }
-                p {
-                    font-family: $montserrat;
-                    text-transform: uppercase;
-                    font-size: 1rem;
-                    letter-spacing: 1px;
-                }
-            }
-            .item,
-            .active.left,
-            .active.right {
-                opacity: 0;
-            }
-            .active,
-            .next.left,
-            .prev.right {
-                opacity: 1;
-            }
-            .next,
-            .prev,
-            .active.left,
-            .active.right {
-                left: 0;
-                transform: translate3d(0, 0, 0);
-            }
-        }
-    }
-}
-
 #footer-promotion {
     @extend .relative-box;
     text-align: center;
     padding: 50px 0px;
-    background-image: url(../img/bg.jpg);
+    //background-image: url(../img/bg.jpg);
     box-shadow: inset 0px 0px 10px 7px darken($base, 20%);
     overflow: hidden;
     &:before {
@@ -390,5 +412,242 @@ main {
         font-size: 0.85rem;
         text-align: center;
         font-family: $raleway;
+    }
+}
+
+#home-carousel{
+    @extend .relative-box;
+    @extend .depth1;
+    #homeCarousel{
+        .carousel-inner{
+            .item{
+                height: 640px;
+                position: relative;
+                background-image: url(../img/grey-linen-texture.jpg);
+                &:nth-child(1){
+                    .logo{
+                        position: absolute;
+                        top: 25%;
+                        left: 25%;
+                        text-align: center;
+                        img{
+                            width: 240px;
+
+                        }
+                    }
+                    .carousel-box{
+                        position: absolute;
+                        &.experience{
+                            top: 25%;
+                            left: 55%;
+                        }
+                        &.digital{
+                            top: 45%;
+                            left: 62%;
+                        }
+                        &.branding{
+                            top: 65%;
+                            left: 58%;
+                        }
+                        h2{
+                            position: relative;
+                            font-size: 1.5rem;
+                            font-family: $montserrat;
+                            letter-spacing: 1px;
+                            font-weight: 500;
+                            width: 12em;
+                            height: 5em;
+                            overflow: hidden;
+                            background-color: darken($theme, 5%);
+                            @extend .depth1;
+                            a{
+                                color: $white;
+                                padding: 1em;
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+                                &:hover{
+                                    i{
+                                        right: 0.5em;
+                                    }
+                                }
+                                i{
+                                    position: absolute;
+                                    color: darken($theme, 15%);
+                                    font-size: 4rem;
+                                    bottom: 0;
+                                    right: 0.25em;
+                                    @include transition(all 0.3s);
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+
+#home-about{
+    @extend .relative-box;
+    padding: 50px 0 120px;
+    .heading{
+        letter-spacing: 2px;
+    }
+    p{
+        font-family: $montserrat;
+        font-weight: 300;
+        margin: 30px 0;
+        font-size: 1rem;
+        line-height: 1.5em;
+    }
+    .list-process{
+        @extend .relative-box;
+        margin: 30px 0;
+        margin-left: 0;
+        li{
+            width: 25%;
+            float: left;
+            text-align: center;
+            i{
+                font-size: 3rem;
+                margin-bottom: 0.5em;
+            }
+            h3{
+                font-size: 1.15rem;
+            }
+        }
+    }
+}
+
+#home-portfolio{
+    @extend .relative-box; 
+    padding: 30px 0;
+    background-color: darken($white, 7%);
+    .portfolio-wrap{
+        @extend .relative-box;
+        padding: 30px 0;
+        .portfolio-grid-wrap{
+            .portfolio-grid{
+                @extend .relative-box;
+                @extend .depth1;
+                border-radius: 4px;
+                margin-bottom: 30px;
+                background-color: $white;
+                color: $base;
+                a{
+                    color: $base;
+                }
+                &.travelocar{
+                    background-color: #F2C94C;
+                }
+                &.shivaansh{
+                    background-color: #FCC311;
+                }
+                &.shine-interiors{
+                    background-color: #95A800;
+                }
+                &.choice-homes{
+                    background-color: #3f3c3e;
+                    color: $white;
+                    a{
+                        color: $white;
+                    }
+                }
+                .portfolio-info{
+                    padding: 15px;
+                    .portfolio-title{
+                        font-weight: 400;
+                        font-family: $raleway;
+                        letter-spacing: 2px;
+                    }
+                    .year-info{
+                        display: inline-block;
+                        font-size: 0.9rem;
+                        line-height: 1.25em;
+                        margin-right: 0.5em;
+                        vertical-align: middle;
+                    }
+                    .portfolio-link{
+                        i{
+                            font-size: 0.9rem;
+                        }
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    .portfolio-description{
+                        font-size: 0.85rem;
+                        margin-top: 1em;
+                        margin-bottom: 2em;
+                        font-family: $montserrat;
+                        font-weight: 300;
+                        line-height: 1.25em;
+                    }
+                    .portfolio-stats{
+                        .stats-icon{
+                            display: inline-block;
+                            width: 32px;
+                            height: 32px;
+                            margin-right: 5px;
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                            background-position: center center;
+                            border-radius: 100%;
+                            &.html{
+                                background-image: url(../img/skills/html5.png);
+                            }
+                            &.sass{
+                                background-image: url(../img/skills/sass.png);
+                            }
+                            &.jquery{
+                                background-image: url(../img/skills/jquery.png);
+                            }
+                            &.php{
+                                background-image: url(../img/skills/php.png);
+                            }
+                            &.bootstrap{
+                                background-image: url(../img/skills/bootstrap.png);
+                            }
+                            &.codeigniter{
+                                background-image: url(../img/skills/codeigniter.png);
+                            }
+                            &.angularjs{
+                                background-image: url(../img/skills/angularjs.png);
+                            }
+                        }
+                    }
+                }
+                .portfolio-img{
+                    padding: 15px;
+                    .img-holder{
+                        height: 200px;
+                        overflow: hidden;
+                        @extend .depth1;
+                        img{
+                            @include transition(all 2s ease);
+                        }
+                    }
+                }
+
+            }
+        }
+    }   
+}
+
+#home-service{
+    @extend .relative-box;
+    .block-bgimg{
+        background-image: url(../img/blog.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        min-height: 200px;
+    }
+    .block-text{
+        .text-inner{
+            width: 70%;
+            margin-left: 30%;
+        }
     }
 }

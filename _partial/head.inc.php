@@ -8,6 +8,6 @@
         <script src=https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js></script>
         <script src=https://oss.maxcdn.com/respond/1.4.2/respond.min.js></script>
     <![endif]-->
-    
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500|Raleway|Roboto|Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500|Raleway|Roboto" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />

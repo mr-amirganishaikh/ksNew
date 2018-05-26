@@ -1,9 +1,19 @@
 <div id="header" class="container">
     <ul id="kreative-navigation" class="list-inline">
-        <li class="link"><a href="about-kreative-sanity.php">Who We Are</a></li>
-        <li class="link"><a href="services-kreative-sanity.php">What We Offer</a></li>
+        <li class="link left">
+            <a href="javascript:;">Work</a>
+            <ul class="list-inline">
+                <li><a href="javascript:;" title="#">Portfolio</a></li>
+                <li><a href="javascript:;" title="#">Services</a></li>
+            </ul>
+        </li>
         <li class="logo"><a href="index.php"><img src="img/logo.png" alt="Official Logo | Kreative Sanity"></a></li>
-        <li class="link"><a href="portfolio-kreative-sanity.php">Our Kreativity</a></li>
-        <li class="link"><a href="contact-kreative-sanity.php">Contact Us</a></li>
+        <li class="link right">
+            <a href="javascript:;">About</a>
+            <ul class="list-inline">
+                <li><a href="javascript:;" title="#">Careers</a></li>
+                <li><a href="javascript:;" title="#">Contact</a></li>
+            </ul>
+        </li>
     </ul>
 </div>
