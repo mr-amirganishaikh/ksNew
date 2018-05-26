@@ -8,8 +8,44 @@ $(document).ready(function () {
         trigger: '.footer .logo'
     });
     footerPromotionForm();
+    onScrollNav();
+    $('body').css('margin-top', $('header').outerHeight());
 });
 
+$(window).resize(function(){
+    $('body').css('margin-top', $('header').outerHeight());
+});
+
+var onScrollNav = function(){
+    var isScrolled,
+        lastST = 0,
+        delta = 5,
+        navH = $('header').outerHeight();
+
+    $(window).scroll(function(){
+        isScrolled = true;
+    });
+
+    setInterval(function(){
+        if(isScrolled){
+            hasScrolled();
+            isScrolled = false;
+        }
+    }, 50);
+
+    function hasScrolled(){
+        var st = $(this).scrollTop();
+        if(Math.abs(lastST - st) <= delta) return;
+        if(st > lastST && st > navH){
+            $('header').css({'top': '-' + navH + 'px'});
+        }else {
+            if((st + $(window).height()) < $(document).height()){
+                $('header').css({'top': '0'});
+            }
+        }
+        lastST = st;
+    }
+}
 
 var socialHover = function (options) {
     var target = options.target;
